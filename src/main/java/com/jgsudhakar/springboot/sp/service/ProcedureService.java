@@ -12,4 +12,6 @@ import com.jgsudhakar.springboot.sp.dto.response.Response;
 public interface ProcedureService {
 
     public Response getEmpData();
+
+    public Response getEmpById(Long id);
 }

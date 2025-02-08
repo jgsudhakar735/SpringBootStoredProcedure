@@ -21,7 +21,8 @@ public class StoredProcInputDto implements Serializable {
 
     private String procName;
 
-    private Map<String, String> inParams;
+    private String schemaName;
 
-    private Map<String, Object> outParams;
+    private Map<String, Object> inParams;
+
 }

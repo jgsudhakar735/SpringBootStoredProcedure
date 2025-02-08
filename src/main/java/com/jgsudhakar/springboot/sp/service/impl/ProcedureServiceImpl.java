@@ -6,6 +6,9 @@ import com.jgsudhakar.springboot.sp.iface.ProcIFace;
 import com.jgsudhakar.springboot.sp.service.ProcedureService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*************************************
  * This Class is used to 
  * Author  : Sudhakar Tangellapalli
@@ -29,6 +32,18 @@ public class ProcedureServiceImpl implements ProcedureService {
     public Response getEmpData() {
         StoredProcInputDto storedProcInputDto = new StoredProcInputDto();
         storedProcInputDto.setProcName("NICK_NAME_PROC");
+        storedProcInputDto.setSchemaName("LEARNING");
+        return procIFace.executeProc(storedProcInputDto);
+    }
+
+    @Override
+    public Response getEmpById(Long id) {
+        StoredProcInputDto storedProcInputDto = new StoredProcInputDto();
+        storedProcInputDto.setProcName("NICK_NAME_PROC_IN");
+        storedProcInputDto.setSchemaName("LEARNING");
+        Map<String,Object> inParams = new HashMap<>();
+        inParams.put("NICK_ID", id.intValue());
+        storedProcInputDto.setInParams(inParams);
         return procIFace.executeProc(storedProcInputDto);
     }
 }
