@@ -4,6 +4,7 @@ import com.jgsudhakar.springboot.sp.dto.request.StoredProcInputDto;
 import com.jgsudhakar.springboot.sp.dto.response.Response;
 import com.jgsudhakar.springboot.sp.iface.ProcIFace;
 import com.jgsudhakar.springboot.sp.service.ProcedureService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -19,11 +20,12 @@ import java.util.Map;
 @Service
 public class ProcedureServiceImpl implements ProcedureService {
 
-    private final ProcIFace procIFace;
+    @Autowired
+    private ProcIFace defaultAbstractProceImpl;
 
-    public ProcedureServiceImpl(ProcIFace procIFace) {
-        this.procIFace = procIFace;
-    }
+    @Autowired
+    private ProcIFace inParamProceImpl;
+
 
     /**
      * @return Response
@@ -33,7 +35,7 @@ public class ProcedureServiceImpl implements ProcedureService {
         StoredProcInputDto storedProcInputDto = new StoredProcInputDto();
         storedProcInputDto.setProcName("NICK_NAME_PROC");
         storedProcInputDto.setSchemaName("LEARNING");
-        return procIFace.executeProc(storedProcInputDto);
+        return defaultAbstractProceImpl.executeProc(storedProcInputDto);
     }
 
     @Override
@@ -44,6 +46,6 @@ public class ProcedureServiceImpl implements ProcedureService {
         Map<String,Object> inParams = new HashMap<>();
         inParams.put("NICK_ID", id.intValue());
         storedProcInputDto.setInParams(inParams);
-        return procIFace.executeProc(storedProcInputDto);
+        return inParamProceImpl.executeProc(storedProcInputDto);
     }
 }
