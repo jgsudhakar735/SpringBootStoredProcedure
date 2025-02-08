@@ -1,0 +1,43 @@
+server:
+  servlet:
+    context-path: /sbtraining
+  port: 9090
+application:
+  description: Spring Boot Application
+  version: 1.0
+spring:
+  application:
+    name: springboot
+  flyway:
+    enabled: false
+  main:
+    banner-mode: console
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: SYSTEM
+    password: TIGER
+    hikari:
+      minimum-idle: 0
+      maximum-pool-size: 10
+      idle-timeout: 30000
+      pool-name: sbtraining-pool-cp
+      max-lifetime: 200000
+      connection-timeout: 30000
+  jmx:
+    enabled: false
+  jpa:
+    show-sql: true
+    open-in-view: true
+    properties:
+      release_mode: after_transaction
+      agressive_release: true
+      hibernate:
+        id:
+          new_generator_mappings: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
